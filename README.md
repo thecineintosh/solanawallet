@@ -13,6 +13,7 @@ The Solana ecosystem is vibrant, but with so many wallets, features, and compati
 - **Advanced Filtering:** Slice and dice the data by platform, custody model, features, and security audits.
 - **Wallet Comparison:** Select wallets to compare side-by-side, or dive into detailed stats for each one.
 - **CSV Export:** Take the data offline for your own analysis.
+- **Comprehensive Coverage:** Includes major wallets like Phantom, Solflare, Backpack, Decaf, Jupiter Wallet, and many more from the [official Solana wallets page](https://solana.com/solana-wallets).
 
 ## Who’s It For?
 
@@ -67,7 +68,7 @@ Open `index.html` in your browser. All data and logic are client-side—no serve
 - **Security Audits:** Update audit status as new reports become available
 - **User Counts:** Refresh monthly user statistics
 - **Version Testing:** Update tested versions and dates
-- **Solana Pay Support:** Verify QR code compatibility changes
+- **Solana Pay Support:** Verify QR code compatibility changes based on the [Solana Pay specification](https://github.com/solana-labs/solana-pay)
 
 ---
 
