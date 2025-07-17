@@ -1,4 +1,4 @@
-# Solana Wallet Directory 2024
+# Solana Wallet Directory
 
 Welcome to the Solana Wallet Directory—a living, breathing guide for anyone navigating the ever-evolving world of Solana wallets. This project is more than just a feature matrix; it’s a hands-on, interactive tool designed to help developers, merchants, and everyday users make informed choices about which wallet best fits their needs.
 
