@@ -1,0 +1,1478 @@
+<!DOCTYPE html><!--  Last Published: Thu Mar 24 2022 01:00:03 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="61ad9953bb767e990ca335bc" data-wf-site="61ad9953bb767e53c6a335bb">
+<head>
+  <meta charset="utf-8">
+  <title>Torus Labs | Open-Source Key Management</title>
+  <meta content="Torus is the most secure passwordless authentication and private key management platform with the security guarantees of non-custodial Public Key Infrastructure (PKI)." name="description">
+  <meta content="Torus Labs | Open-Source Key Management" property="og:title">
+  <meta content="Torus is the most secure passwordless authentication and private key management platform with the security guarantees of non-custodial Public Key Infrastructure (PKI)." property="og:description">
+  <meta content="https://uploads-ssl.webflow.com/60576ecd0fcb94c403250d07/61931e1c79a9345f70cdaf4f_torus-og.png" property="og:image">
+  <meta content="Torus Labs | Open-Source Key Management" property="twitter:title">
+  <meta content="Torus is the most secure passwordless authentication and private key management platform with the security guarantees of non-custodial Public Key Infrastructure (PKI)." property="twitter:description">
+  <meta content="https://uploads-ssl.webflow.com/60576ecd0fcb94c403250d07/61931e1c79a9345f70cdaf4f_torus-og.png" property="twitter:image">
+  <meta property="og:type" content="website">
+  <meta content="summary_large_image" name="twitter:card">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/components.css" rel="stylesheet" type="text/css">
+  <link href="css/torus00.css" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic","Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic","DM Sans:regular,italic,500,500italic,700,700italic:latin,latin-ext"]  }});</script>
+  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-126622802-1"></script>
+  <script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-126622802-1', {'anonymize_ip': false});</script>
+  <style type="text/css" media="screen">
+    .editor-container {
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .inline-editor { 
+      width: 300px;
+      height: 300px;
+      border-radius: 6px;
+    }
+    .ace_scroller, .ace_gutter {
+      padding: 10px 0 0 0 !important;
+    }
+    .ace-tomorrow-night {
+      background-color: rgb(24, 48, 85) !important;
+    }
+    .ace-tomorrow-night.ace_multiselect .ace_selection.ace_start {
+      box-shadow: 0 0 3px 0px rgb(24, 48, 85) !important;
+    }
+    .ace-tomorrow-night .ace_gutter {
+      background-color: rgb(24, 48, 85) !important;
+    }
+    .ace-tomorrow-night .ace_gutter-active-line {
+      background-color: rgb(24, 48, 85) !important;
+    }
+    .ace-tomorrow-night .ace_marker-layer .ace_active-line {
+      background: rgb(15, 38, 73) !important;
+    }
+    .ace-tomorrow-night .ace_keyword {
+      color: #61e3a5 !important;
+    }
+    .ace-tomorrow-night .token.string {
+      color: #71a7ff !important;
+    }
+    .ace-tomorrow-night .ace_keyword.ace_operator {
+      color: #ff9d3d !important;
+    }
+    .ace-tomorrow-night .ace_keyword, .ace-tomorrow-night .ace_meta, .ace-tomorrow-night .ace_storage, .ace-tomorrow-night .ace_storage.ace_type, .ace-tomorrow-night .ace_support.ace_type {
+      color: #61e3a5 !important;
+    }
+    .normal-mode .ace_cursor {
+      border: none;
+      background-color: #C5C8C680;
+    }
+    .normal-mode .ace_hidden-cursors .ace_cursor {
+      border: 1px solid #C5C8C6;
+    }
+    @media only screen and (min-width: 375px) {
+      .inline-editor { 
+        width: 355px;
+      }
+    }
+    @media only screen and (min-width: 400px) {
+      .inline-editor { 
+        width: 380px;
+      }
+    }
+    @media only screen and (min-width: 520px) {
+      .inline-editor { 
+        width: 500px;
+      }
+    }
+    @media only screen and (min-width: 620px) {
+      .inline-editor { 
+        width: 600px;
+      }
+    }
+  </style>
+  <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="b1ae36a2-c9d5-4554-9db8-b28aeb8ddf4e";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script><!--  Google Tag Manager  -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KN2SFHS');</script>
+  <!--  End Google Tag Manager  -->
+</head>
+<body>
+  <div class="notification-bar-2">
+    <div class="bar-container">
+      <div class="text-block-39">The way to integrate the Torus Network is now with Web3Auth - we&#x27;ve raised $13m in funding<br></div>
+      <a href="https://medium.com/toruslabs/web3auth-raises-13m-series-a-to-drive-mass-adoption-on-web3-applications-and-wallets-via-simple-948b6008cdb5" target="_blank" class="button-8 w-button">Read More ☄️</a>
+      <a href="#" class="close w-inline-block"><img src="images/close.svg" loading="lazy" data-w-id="3d5e8d0f-c9d6-592c-31eb-ccb994a70e0f" alt=""></a>
+    </div>
+  </div>
+  <div data-collapse="medium" data-animation="default" data-duration="400" data-w-id="36e3f6bf-0e81-36dc-8552-74a93e1b3298" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
+    <div class="container navbar-container w-container">
+      <div class="nav-column left">
+        <a href="index.html" aria-current="page" class="w-nav-brand w--current"><img src="images/torus-logo-blue-1.svg" alt="" class="logo-brand-white"></a>
+      </div>
+      <nav role="navigation" class="nav-menu-2 w-nav-menu">
+        <div data-hover="true" data-delay="0" class="dropdown w-dropdown">
+          <div class="nav-link-2 w-dropdown-toggle">
+            <div class="w-icon-dropdown-toggle"></div>
+            <div>Developers</div>
+          </div>
+          <nav class="dropdown-list-2 resources w-dropdown-list">
+            <div class="w-layout-grid drop-grid-2">
+              <div class="drop-list-div-2">
+                <div class="drop-title-2">INTEGRATIONS</div>
+                <a href="https://web3auth.io" class="dropdown-link-2 w-inline-block"><img src="images/Web3Auth.svg" alt="" class="drop-icon">
+                  <div class="text-2">Web3Auth</div>
+                </a>
+                <a href="https://toruswallet.io" class="dropdown-link-2 w-inline-block"><img src="images/Wallet.svg" alt="" class="drop-icon">
+                  <div class="text-2">Torus Wallet</div>
+                </a>
+              </div>
+              <div class="drop-list-div-3">
+                <div class="drop-title-2">others</div>
+                <a href="https://docs.web3auth.io" class="dropdown-link-2 w-inline-block"><img src="images/Documentation.png" alt="" class="drop-icon">
+                  <div class="text-2">Documentation</div>
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div data-hover="true" data-delay="0" class="dropdown w-dropdown">
+          <div class="nav-link-2 w-dropdown-toggle">
+            <div class="w-icon-dropdown-toggle"></div>
+            <div>Users</div>
+          </div>
+          <nav class="dropdown-list-2 template desktop-dropdown w-dropdown-list">
+            <div class="w-layout-grid drop-grid-2 desktop-dropdown">
+              <div class="drop-list-div">
+                <div class="drop-title-2">manage</div>
+                <a href="https://app.openlogin.com" target="_blank" class="dropdown-link-disabled w-inline-block"><img src="images/OpenLogin--user.svg" alt="" class="drop-icon">
+                  <div class="text-2">OpenLogin</div>
+                </a>
+                <a href="https://app.tor.us" target="_blank" class="dropdown-link-2 w-inline-block"><img src="images/Wallet---user.svg" alt="" class="drop-icon">
+                  <div class="text-2">Wallet</div>
+                </a>
+                <a href="https://solana.tor.us" target="_blank" class="dropdown-link-2 w-inline-block"><img src="images/WalletSolana.svg" alt="" class="drop-icon">
+                  <div class="text-2">Solana Wallet</div>
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div data-hover="true" data-delay="0" class="dropdown w-dropdown">
+          <div class="nav-link-2 w-dropdown-toggle">
+            <div class="w-icon-dropdown-toggle"></div>
+            <div>About Torus</div>
+          </div>
+          <nav class="dropdown-list-2 w-dropdown-list">
+            <div class="w-layout-grid drop-grid-2 smaller-dropdown-list">
+              <div id="w-node-_4c51f7f0-7be5-8218-4fe4-e40887b10e5e-3e1b3298" class="drop-list-div">
+                <a href="about-us.html" class="dropdown-link-2 w-inline-block"><img src="images/About-us.png" alt="" class="drop-icon">
+                  <div class="text-2">About us</div>
+                </a>
+                <a href="partners.html" class="dropdown-link-2 w-inline-block"><img src="images/DApp-List.png" alt="" class="drop-icon">
+                  <div class="text-2">Partners</div>
+                </a>
+                <a href="https://angel.co/company/torus-2" class="dropdown-link-2 w-inline-block"><img src="images/Career.png" alt="" class="drop-icon">
+                  <div class="text-2">Career</div>
+                </a>
+                <a href="https://medium.com/toruslabs" class="dropdown-link-2 w-inline-block"><img src="images/Blog.png" alt="" class="drop-icon">
+                  <div class="text-2">Blog</div>
+                </a>
+                <a href="contact-us.html" class="dropdown-link-2 w-inline-block"><img src="images/Contact-us.png" alt="" class="drop-icon">
+                  <div class="text-2">Contact us</div>
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </nav>
+      <div class="nav-column right">
+        <a href="https://docs.tor.us/" class="button nav-button w-button">Read Docs</a>
+      </div>
+      <div class="menu-button w-nav-button">
+        <div class="icon-3 w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+  <div class="w-embed">
+    <style>
+.clip {
+    -webkit-background-clip: text;
+    color: transparent;
+}
+</style>
+  </div>
+  <div data-w-id="c3b25ba7-acfb-d7bd-04bf-0ba02a287657" style="opacity:0" class="section-5 wf-section">
+    <div class="hero-banner-home">
+      <div id="hero-sec" class="hero-cont w-container">
+        <div class="container-5 hero-homepage-2">
+          <div class="hero-column-2 w-row">
+            <div class="column-18 w-col w-col-7 w-col-medium-6 w-col-small-small-stack w-col-tiny-tiny-stack">
+              <div class="hero-div">
+                <h1 class="text-header hero-small left-align white">An open source, non-custodial key management network</h1>
+                <div class="big-text-4 center-text left white">Making Web3 simple, secure, and easy to use</div>
+                <a href="https://tech.tor.us" target="_blank" class="button-hero secondary-mode w-button">Try Demo</a>
+              </div>
+            </div>
+            <div class="column-23 w-col w-col-5 w-col-medium-6 w-col-small-small-stack w-col-tiny-tiny-stack">
+              <a href="https://tech.tor.us" target="_blank" class="w-inline-block">
+                <div data-w-id="0e116c15-208c-0aca-f0ef-1a93194d0c93" data-animation-type="lottie" data-src="documents/data.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="8.033333333333333" data-duration="0"></div>
+              </a>
+              <div class="div-block-52"><img src="images/arrow-up.gif" loading="lazy" width="40" height="40" alt="" class="image-467"></div>
+              <div class="big-text-4">Try it yourself</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-2-copy wf-section">
+    <div data-w-id="a22a16df-4785-08f0-b921-e0dcaac3d566" style="opacity:0" class="container padding-top">
+      <div class="div-block-24">
+        <div data-delay="4000" data-animation="outin" class="slider-companies-small w-slider" data-autoplay="true" data-easing="ease-in-out" data-hide-arrows="true" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="4" data-duration="2000" data-infinite="true">
+          <div class="w-slider-mask">
+            <div class="slide-2 small w-slide">
+              <div class="slider-wrapper-wide">
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-12-at-5.46.55-PM.png" srcset="images/Screenshot-2021-03-12-at-5.46.55-PM-p-500.png 500w, images/Screenshot-2021-03-12-at-5.46.55-PM.png 660w" height="48" sizes="(max-width: 479px) 100vw, (max-width: 767px) 28vw, (max-width: 991px) 19vw, (max-width: 1279px) 15vw, 166.734375px" alt="" class="image-477"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-12-at-5.47.18-PM.png" width="194" sizes="(max-width: 479px) 100vw, (max-width: 767px) 22vw, (max-width: 1279px) 15vw, 167.1875px" srcset="images/Screenshot-2021-03-12-at-5.47.18-PM-p-500.png 500w, images/Screenshot-2021-03-12-at-5.47.18-PM.png 576w" alt="" class="image-475"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-12-at-5.47.32-PM.png" sizes="(max-width: 479px) 100vw, (max-width: 767px) 22vw, (max-width: 1279px) 15vw, 133.75px" srcset="images/Screenshot-2021-03-12-at-5.47.32-PM-p-500.png 500w, images/Screenshot-2021-03-12-at-5.47.32-PM.png 640w" alt="" class="image-478"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-12-at-5.47.46-PM.png" sizes="(max-width: 479px) 100vw, (max-width: 767px) 20vw, (max-width: 1279px) 13vw, 117.03125px" srcset="images/Screenshot-2021-03-12-at-5.47.46-PM-p-500.png 500w, images/Screenshot-2021-03-12-at-5.47.46-PM.png 670w" alt="" class="image-476"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-12-at-5.51.02-PM.png" width="280" alt="" class="image-474"></div>
+              </div>
+            </div>
+            <div class="slide-2-copy small w-slide">
+              <div class="slider-wrapper-wide">
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-15-at-6.37.36-PM.png" srcset="images/Screenshot-2021-03-15-at-6.37.36-PM-p-500.png 500w, images/Screenshot-2021-03-15-at-6.37.36-PM.png 726w" height="48" sizes="(max-width: 479px) 100vw, (max-width: 767px) 25vw, 121.84375px" alt="" class="image-477"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-15-at-6.36.32-PM.png" width="194" sizes="(max-width: 479px) 100vw, (max-width: 767px) 22vw, (max-width: 1279px) 15vw, 167.1875px" srcset="images/Screenshot-2021-03-15-at-6.36.32-PM-p-500.png 500w, images/Screenshot-2021-03-15-at-6.36.32-PM.png 922w" alt="" class="image-475"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-15-at-6.37.05-PM.png" sizes="(max-width: 479px) 100vw, (max-width: 767px) 22vw, (max-width: 1279px) 15vw, 133.75px" srcset="images/Screenshot-2021-03-15-at-6.37.05-PM-p-500.png 500w, images/Screenshot-2021-03-15-at-6.37.05-PM.png 662w" alt="" class="image-478"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-15-at-6.38.22-PM.png" alt="" class="image-476"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-15-at-6.41.39-PM.png" width="280" alt="" class="image-474"></div>
+              </div>
+            </div>
+            <div class="slide-2 small slide-3 w-slide">
+              <div class="slider-wrapper-wide">
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-12-at-5.50.47-PM.png" alt="" class="check-who-is-using-us-logos-2"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Kukai.png" alt="" class="check-who-is-using-us-logos-2"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Sequence_2.png" width="173" alt="" class="kyber-logo"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Keplr.png" width="70" alt="" class="yearn-logo"></div>
+                <div class="logo-wrapper-wide-2"><img src="images/Screenshot-2021-03-12-at-5.50.11-PM.png" width="190" sizes="(max-width: 479px) 100vw, (max-width: 767px) 22vw, (max-width: 1279px) 15vw, 167.1875px" srcset="images/Screenshot-2021-03-12-at-5.50.11-PM-p-500.png 500w, images/Screenshot-2021-03-12-at-5.50.11-PM.png 696w" alt="" class="check-who-is-using-us-logos-2"></div>
+              </div>
+            </div>
+          </div>
+          <div class="left-arrow w-slider-arrow-left">
+            <div class="icon-2 w-icon-slider-left"></div>
+          </div>
+          <div class="right-arrow w-slider-arrow-right">
+            <div class="icon-2 w-icon-slider-right"></div>
+          </div>
+          <div class="slide-nav-2 w-slider-nav w-slider-nav-invert w-round"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-9 more-top-padding wf-section">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="text-header keys-header">The best way to manage users&#x27; keys</h1>
+        <p class="big-text center-text">Say goodbye to seed phrases!</p>
+        <div class="build-for-web3-col w-row">
+          <div class="column-25 w-col w-col-4 w-col-stack w-col-tiny-tiny-stack"><img src="images/Familiarity.svg" loading="lazy" width="80" height="80" alt="" class="image-470">
+            <h5 class="heading-18"><strong class="bold-text-4">Simplified Onboarding, Higher Conversion Rates</strong></h5>
+            <p class="paragraph-25">Increase conversion by as much as  64% with familiar flows for your users.</p>
+          </div>
+          <div class="column-24 w-col w-col-4 w-col-stack w-col-tiny-tiny-stack"><img src="images/EnhancedSecurity.svg" loading="lazy" width="80" height="80" alt="" class="image-470">
+            <h5 class="heading-18"><strong class="bold-text-4">Reduced Key Loss<br>‍</strong></h5>
+            <p class="paragraph-25">Remove seed phrases for new users and reduce scams, support tickets and the hassle.</p>
+          </div>
+          <div class="column-15 w-col w-col-4 w-col-stack w-col-tiny-tiny-stack"><img src="images/Incremental-Security.svg" loading="lazy" width="80" height="80" alt="" class="image-470">
+            <h5 class="heading-18"><strong class="bold-text-4">Enhanced and Incremental 2FA Security</strong></h5>
+            <p class="paragraph-25">Break up a key into multiple factors that allows for recoverability without compromising on security.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="torus-feats" class="section-9 white-section torusv2 wf-section">
+    <div data-w-id="a8087fa8-a076-2301-5d44-5dc03deb7432" style="opacity:0" class="container-5">
+      <div data-w-id="0568fe2c-972f-76be-a6af-0237d9c7286b" style="opacity:0" class="w-layout-grid grid-11">
+        <div id="w-node-_6e6fff36-bc64-8a27-cb44-0582bcfa8a8e-0ca335bc" class="page-tittle-2 left">
+          <p class="tiny-para">How are keys managed?</p>
+          <h2 class="text-header hero-small left-align">Leverage on existing  devices, social accounts &amp; UX flows</h2>
+          <p class="paragraph-24">Key Infrastructure that splits a user’s key between a device, an input, and an existing login. A user can reconstruct their key by combining any of the two.</p>
+          <a href="https://docs.web3auth.io/key-infrastructure/technical-architecture" target="_blank" class="button-hero primary-mode w-button">View Docs</a>
+        </div>
+        <div id="w-node-_21e6e4a8-cbf7-9ef4-42d7-873aaaab4f2f-0ca335bc" class="div-block-9 torusv2"><img src="images/Keysmgt.svg" loading="lazy" alt=""></div>
+      </div>
+    </div>
+  </div>
+  <div class="off-chain-container">
+    <div class="page-header">
+      <h1 class="text-header keys-header">Off-Chain Multi-Sigs Powered by Threshold Cryptography</h1>
+      <p class="big-text center-text">User keys are split via a threshold scheme into “shares” secured on a mixture of authentication methods and user devices. A threshold number of shares are required to gain access to the key.</p>
+    </div>
+    <div><img src="images/Keyshares.svg" loading="lazy" alt=""></div>
+  </div>
+  <div data-w-id="f2657773-2a79-a89d-5797-677a457eb1b5" class="cta-blue wf-section">
+    <div class="container-1208 w-container">
+      <div class="columns-16 w-row">
+        <div class="column-35 w-col w-col-8">
+          <h2 class="heading-21">Integrate via Web3Auth</h2>
+          <div class="text-block-9">Pluggable authentication infrastructure for Web3 Applications and Wallets</div>
+          <a href="https://web3auth.io" target="_blank" class="button-white w-button">Get Started</a>
+        </div>
+        <div class="column-34 w-col w-col-4">
+          <div class="div-block-78">
+            <div data-w-id="f2657773-2a79-a89d-5797-677a457eb1c1" data-animation-type="lottie" data-src="documents/npmiweb3auth.json" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="5" data-duration="0" data-clipboard-text="npm i @web3auth/web3auth" class="copy-to-clipboard"></div><img src="images/copy-clipboard.svg" loading="lazy" alt="" class="image-522">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tkey-container">
+    <div class="page-header">
+      <h1 class="text-header keys-header">Scale with Torus Network</h1>
+    </div>
+    <div class="web3auth-div"><img src="images/Torus-Network.svg" loading="lazy" alt=""></div>
+  </div>
+  <div class="build-for-web3-2 wf-section">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="text-header keys-header white">You don&#x27;t have to hear it from us</h1>
+        <p class="big-text center-text white">Here’s what some industry thought leaders have to say</p>
+        <div class="column-tweet-1 w-row">
+          <div class="w-col w-col-8">
+            <div><img src="images/Group-4974.svg" loading="lazy" alt="" class="image-496"></div>
+          </div>
+          <div class="w-col w-col-4">
+            <div><img src="images/Group-4971.svg" loading="lazy" width="319" alt=""></div>
+          </div>
+        </div>
+        <div class="column-tweet-1 w-row">
+          <div class="w-col w-col-8">
+            <div><img src="images/Group-4972.svg" loading="lazy" alt="" class="image-495"></div>
+          </div>
+          <div class="w-col w-col-4">
+            <div><img src="images/Group-4973.svg" loading="lazy" width="319" alt=""></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-16 wf-section">
+    <div id="disc-key-sec" class="div-block-70">
+      <div class="container-7 w-container">
+        <h1 class="heading-4">Experience tKey yourself</h1>
+      </div>
+      <div class="text-block-36">Find out how Torus Key Infrastructure (tKey) gives you a better key management experience.</div>
+      <div class="w-container">
+        <div data-w-id="12520702-68f5-a29f-2118-95132184dd78" data-animation-type="lottie" data-src="https://uploads-ssl.webflow.com/60a726f7ba5aaf04f086230f/60a726f7ba5aaf5cbd862383_Hero.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="5.033333333333333" data-duration="0" id="hero-sec" class="lottie-animation-9"></div>
+      </div>
+    </div>
+    <div class="container-1207 w-container">
+      <div data-duration-in="300" data-duration-out="100" data-current="Tab 1" data-easing="ease" class="tabs-4 w-tabs">
+        <div class="tabs-menu-2 w-tab-menu">
+          <a data-w-tab="Tab 1" id="gen-pkey-tab-btn" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c451" class="tab-link-tab-1 w-inline-block w-tab-link w--current">
+            <div data-w-id="248a9181-7393-7ad3-bb5d-d4879893c452" data-animation-type="lottie" data-src="https://uploads-ssl.webflow.com/61ad996e7d943b256097e631/61ad996e7d943b0aae97e6a8_GenerateKey.json" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="4.366666666666666" data-duration="0" class="lottie-animation-10 generate-animation"></div>
+            <div class="text-block-38 generate-title">GENERATE PRIVATE KEY</div>
+          </a>
+          <a data-w-tab="Tab 2" id="recon-pkey-tab-btn" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c455" class="tab-link-tab-2 w-inline-block w-tab-link">
+            <div data-w-id="248a9181-7393-7ad3-bb5d-d4879893c456" data-animation-type="lottie" data-src="https://uploads-ssl.webflow.com/61ad996e7d943b256097e631/61ad996e7d943b232197e68a_ReconstructKey.json" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="4.4" data-duration="0" class="lottie-animation-10 generate-animation"></div>
+            <div class="text-block-38 generate-title">RECONSTRUCT PRIVATE KEY</div>
+          </a>
+        </div>
+      </div>
+      <div id="tabs" class="tab-nav">
+        <div class="div-block-73">
+          <div class="columns-15 w-row">
+            <div class="column-30 w-col w-col-6 w-col-small-small-stack">
+              <a data-w-id="248a9181-7393-7ad3-bb5d-d4879893c45d" href="#" class="generate_link tab-selected w-inline-block">
+                <div id="gen-pkey-small-btn" class="text-block-25">Generate Private Key</div>
+              </a>
+              <a id="create-key-small-btn" href="#gen-key-sec" class="link-block-2 w-inline-block">
+                <div class="text-block-24">Create Private Key</div><img src="images/arrow-left-circle-active_1arrow-left-circle-active.png" loading="lazy" alt="" class="image-22">
+              </a>
+            </div>
+            <div class="column-22 w-col w-col-6 w-col-small-small-stack">
+              <a href="#" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c465" class="reconstruct_link w-inline-block">
+                <div id="recon-pkey-small-btn" class="text-block-25">Reconstruct Private Key</div>
+              </a>
+              <a id="split-key-small-btn" href="#split-key-sec" class="recontsruct_link2 w-inline-block">
+                <div class="text-block-24">Split Private Key</div><img src="images/arrow_right_circle_1arrow_right_circle.png" loading="lazy" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c46b" alt="" class="image-22"><img src="images/arrow-right-circle_1arrow-right-circle.png" loading="lazy" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c46c" alt="" class="image-22">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="mobile-tabs" class="tab-nav-mobile">
+        <div class="div-block-73">
+          <div class="columns-15 w-row">
+            <div class="column-30 w-col w-col-6 w-col-small-small-stack w-col-tiny-6">
+              <a id="mobile-gen-btn" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c471" href="#" class="generate_link tab-selected w-inline-block">
+                <div class="text-block-25">Generate Private key</div>
+              </a>
+            </div>
+            <div class="column-22 w-col w-col-6 w-col-small-small-stack w-col-tiny-6">
+              <a id="mobile-recon-btn" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c475" href="#" class="reconstruct_link w-inline-block">
+                <div class="text-block-25">Reconstruct Private Key</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="div-block-75">
+        <h1 class="steps-mob firststep-mobile">1</h1>
+        <div class="text-block-26">Create a private key</div>
+      </div>
+      <div id="gen-pkey-sec" class="generatetab first-step">
+        <div class="div-block-72">
+          <h1 class="heading-33 firststep">1</h1><img src="images/Group-5365.png" loading="lazy" alt="" class="image-34">
+          <h1 class="heading-33 secondstep">2</h1><img src="images/Group-5365.png" loading="lazy" alt="" class="image-34">
+          <h1 class="heading-33 thirdstep">3</h1>
+        </div>
+        <div id="gen-key-sec" class="generate-content">
+          <div data-w-id="248a9181-7393-7ad3-bb5d-d4879893c488" data-animation-type="lottie" data-src="https://uploads-ssl.webflow.com/61ad996e7d943b256097e631/61ad996e7d943be0f997e6b0_GeneratingPrivateKey.json" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="3.2" data-duration="0" class="lottie-animation-2 generating-key generate-animation"></div>
+          <h1 class="firstload">Create a private key.</h1>
+          <h1 class="tobeshown">Generating your private key...</h1><img src="images/dots-white.svg" loading="lazy" width="85" alt="" class="image-41">
+          <h1 class="heading-34">Private key generated!</h1>
+          <div class="generated w-form">
+            <form id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form" method="get" class="form-13">
+              <div class="div-block-47 div-private-key"><input type="text" class="text-field-2 blur-overlay w-input" maxlength="256" name="private-key" data-name="private-key" placeholder="" id="private-key-input">
+                <div class="div-block-48">
+                  <a id="gen-pkey-copy" href="#" class="copy-btn w-inline-block"><img src="images/_1.png" loading="lazy" alt="" class="image-39">
+                    <div class="text-block-32">COPY</div>
+                  </a>
+                  <a id="gen-pkey-show" href="#" class="show-btn w-inline-block"><img src="images/reveal.svg" loading="lazy" alt="" class="image-39">
+                    <div class="text-block-32">SHOW</div>
+                  </a>
+                </div>
+              </div>
+            </form>
+            <div class="success-message-7 w-form-done"></div>
+            <div class="error-message-5 w-form-fail"></div>
+            <a href="#splitting-keys" id="next-pbtn" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c49f" class="link-block-6 generate-done w-inline-block">
+              <div class="text-block-37">NEXT</div>
+            </a>
+          </div>
+          <a id="gen-key-pbtn" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c4a2" href="#" class="button-7 generate-btn w-button">GENERATE PRIVATE KEY</a>
+        </div>
+        <div class="div-block-75 step2-mob">
+          <h1 class="steps-mob firststep-mobile">2</h1>
+          <div class="text-block-26">Split the private key</div>
+        </div>
+        <div id="splitting-keys" class="second-step">
+          <div id="split-key-sec" class="split-key">
+            <div data-w-id="248a9181-7393-7ad3-bb5d-d4879893c4ab" data-animation-type="lottie" data-src="https://uploads-ssl.webflow.com/61ad996e7d943b256097e631/61ad996e7d943b514b97e684_SplitKey.json" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="3.3666666666666667" data-duration="0" id="split-key-animation" class="lottie-animation-3"></div>
+            <div class="splitting-content">
+              <h1 class="heading-34">Split the private key.</h1>
+              <p class="paragraph-29">Gain better security by splitting your key into 3 shares.<br>‍</p>
+              <a id="split-key-pbtn" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c4b3" href="#" class="button-7 splitkey-btn w-button">SPLIT THE PRIVATE KEY</a>
+            </div>
+          </div>
+          <div class="splitting-key">
+            <div id="splitting-key-sec" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c4b6" class="splitting-content">
+              <h1 class="heading-34">Splitting private key...</h1>
+              <p class="paragraph-29">Gain better security by splitting your key into 3 shares.<br>‍</p><img src="images/dots-white.svg" loading="lazy" width="85" alt="" class="image-41-copy">
+            </div>
+          </div>
+          <div class="splitted-key">
+            <div id="pvt-key-split-sec" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c4bf" class="splitting-content">
+              <h1 class="heading-34">Private key split!</h1>
+              <p class="paragraph-29">Gain better security by splitting your key into 3 shares.<br>‍</p>
+              <a href="#auth-sec" id="next-pbtn" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c4c6" class="button-7 splitting-done w-button">NEXT</a>
+            </div>
+          </div>
+        </div>
+        <div class="div-block-75 step3-mob">
+          <h1 class="steps-mob firststep-mobile">3</h1>
+          <div class="text-block-26">Setup authentication factors</div>
+        </div>
+        <div class="third-step">
+          <div id="auth-sec" class="authentication-content">
+            <div class="div-block-76">
+              <div id="auth-lottie" class="div-block-49"></div>
+            </div>
+            <h1 class="heading-34">Set up authentication factors.</h1>
+            <p class="paragraph-29">Pair each key share with an authentication factor.</p>
+            <div class="auth-steps">
+              <div id="gen-social-login-sec" class="auth-tables first-step-table w-row">
+                <div class="column-29 w-clearfix w-col w-col-3 w-col-tiny-3"><img src="images/Socials.svg" loading="lazy" width="80" alt="" class="image-7"></div>
+                <div class="column-33 w-col w-col-9 w-col-tiny-9">
+                  <h3 class="heading-20">Pair with your <strong class="bold-text-5">social login</strong></h3>
+                  <a href="#" class="social-btn w-inline-block"><img src="images/Group-4906.png" loading="lazy" id="gen-google-btn" alt="" class="image-8"></a>
+                  <div id="gen-social-output-sec" class="loggedin-container">
+                    <div class="w-form">
+                      <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="form-4">
+                        <div class="div-block-47"><input type="text" class="text-field-2 w-input" maxlength="256" name="name" data-name="Name" placeholder="" id="gen-email-field">
+                          <div class="div-block-48"><img src="images/greenTikInput_1greenTikInput.png" loading="lazy" alt="" class="image-38"></div>
+                        </div>
+                      </form>
+                      <div class="success-message-5 w-form-done"></div>
+                      <div class="error-message-7 w-form-fail"></div>
+                    </div>
+                    <div class="key-loggedin">
+                      <div class="form-block-3 w-form">
+                        <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="form-11">
+                          <div class="div-block-47"><input type="text" class="text-field-2 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="gen-social-share-field">
+                            <div class="div-block-48">
+                              <a href="#" class="copy-btn w-inline-block"><img src="images/_1.png" loading="lazy" alt="" class="image-39">
+                                <div id="gen-copy-social-share" class="text-block-32">COPY</div>
+                              </a>
+                            </div>
+                          </div>
+                        </form>
+                        <div class="w-form-done"></div>
+                        <div class="errormessage-container w-form-fail"></div>
+                      </div>
+                      <a id="gen-social-rem-tbtn" href="#" class="button-7 remove-btn w-button">REMOVE</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="gen-device-share-sec" class="auth-tables second-step-table w-row">
+                <div class="w-clearfix w-col w-col-3 w-col-tiny-3"><img src="images/Device.svg" loading="lazy" width="80" alt="" class="image-7"></div>
+                <div class="column-33 w-col w-col-9 w-col-tiny-9">
+                  <h3 class="heading-20">Allow <strong class="bold-text-5">device storage</strong></h3>
+                  <div class="columns-12 w-row">
+                    <div class="column w-clearfix w-col w-col-4">
+                      <a id="gen-allow-device-btn" href="#" class="button-7 dont-btn w-button">ALLOW DEVICE</a>
+                    </div>
+                    <div class="w-col w-col-8">
+                      <a id="gen-skip-device-btn" href="#" class="button-7 skip-device w-button">SKIP</a>
+                    </div>
+                  </div>
+                  <div id="gen-device-output-sec" class="loggedin-container">
+                    <div class="w-form">
+                      <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="form-4">
+                        <div class="div-block-47"><input type="text" class="text-field-2 w-input" maxlength="256" name="name-3" data-name="Name 3" placeholder="" id="gen-device-name-field">
+                          <div class="div-block-48"><img src="images/greenTikInput_1greenTikInput.png" loading="lazy" alt="" class="image-38"></div>
+                        </div>
+                      </form>
+                      <div class="success-message-5 w-form-done"></div>
+                      <div class="error-message-7 w-form-fail"></div>
+                    </div>
+                    <div class="key-loggedin">
+                      <div class="form-block-3 w-form">
+                        <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="form-11">
+                          <div class="div-block-47"><input type="text" class="text-field-2 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="gen-device-share-field">
+                            <div class="div-block-48">
+                              <a href="#" class="copy-btn w-inline-block"><img src="images/_1.png" loading="lazy" alt="" class="image-39">
+                                <div id="gen-copy-device-share" class="text-block-32">COPY</div>
+                              </a>
+                            </div>
+                          </div>
+                        </form>
+                        <div class="w-form-done">
+                          <div class="text-block-34">Thank you! Your submission has been received!</div>
+                        </div>
+                        <div class="error-message-3 w-form-fail">
+                          <div class="text-block-33">Oops! Something went wrong while submitting the form.</div>
+                        </div>
+                      </div>
+                      <a id="gen-device-rem-btn" href="#" class="button-7 remove-btn w-button">REMOVE</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="gen-password-share-sec" class="auth-tables third-step-table w-row">
+                <div class="w-clearfix w-col w-col-3 w-col-tiny-3"><img src="images/Password.svg" loading="lazy" width="80" alt="" class="image-7"></div>
+                <div class="column-33 w-col w-col-9 w-col-tiny-9">
+                  <h3 class="heading-20">Enter <strong class="bold-text-5">recovery password</strong></h3>
+                  <div class="form-block-4 w-form">
+                    <form id="gen-password-form" name="email-form-2" data-name="Email Form 2" method="get" class="form-12">
+                      <div class="div-block-47 password"><input type="password" class="text-field-2 w-input" maxlength="256" name="recovery-password" data-name="recovery-password" placeholder="Min 10 alphanumeric characters" id="gen-password-input">
+                        <div class="div-block-48"><img src="images/reveal.svg" loading="lazy" id="gen-view-pwd" alt="" class="generate-viewpass1"></div>
+                      </div>
+                      <div class="div-block-47 password"><input type="password" class="text-field-2 w-input" maxlength="256" name="confirm-password" data-name="confirm-password" placeholder="Retype  your password" id="gen-confirm-password-inout" required="">
+                        <div class="div-block-48"><img src="images/reveal.svg" loading="lazy" width="17" id="gen-view-confirm-pwd" alt="" class="generate-viewpass1"></div>
+                      </div><input type="submit" value="ENTER" data-wait="Please wait..." id="gen-submit-pwd" class="submit-button-2 w-button">
+                    </form>
+                    <div class="success-message-5 w-form-done"></div>
+                    <div class="errormessage-container w-form-fail"></div>
+                  </div>
+                  <div class="loggedin-container">
+                    <div class="key-loggedin">
+                      <div class="form-block-3 w-form">
+                        <form id="gen-pwd-share-field" name="email-form-3" data-name="Email Form 3" method="get" class="form-10">
+                          <div class="div-block-47"><input type="text" class="text-field-2 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="rec-device-share-field">
+                            <div class="div-block-48">
+                              <a href="#" class="copy-btn w-inline-block"><img src="images/_1.png" loading="lazy" alt="" class="image-39">
+                                <div id="gen-copy-pwd-share" class="text-block-32">COPY</div>
+                              </a>
+                            </div>
+                          </div>
+                        </form>
+                        <div class="w-form-done">
+                          <div>Thank you! Your submission has been received!</div>
+                        </div>
+                        <div class="w-form-fail">
+                          <div>Oops! Something went wrong while submitting the form.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="div-block-71">
+              <div id="gen-key-setup-done" class="auth-tables done-table w-row">
+                <div class="column-31 w-clearfix w-col w-col-1"><img src="images/check-icon.svg" loading="lazy" width="50" height="50" alt="" class="image-7 done-img"></div>
+                <div class="column-33 center w-clearfix w-col w-col-11">
+                  <h1 class="whytkey-content-copy">Done! Your key is all set up.</h1>
+                  <p class="paragraph-29 done-text">You&#x27;ve successfully secured your key.</p>
+                  <a id="recon-key-btn" data-w-id="248a9181-7393-7ad3-bb5d-d4879893c550" href="#" class="button-7 dont-btn w-button">RECONSTRUCT MY KEY</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reconstruct-tab">
+        <div class="div-block-77">
+          <div id="recon-key-sec" class="reconstruct-key">
+            <div class="reconstruct-content">
+              <div class="div-block-74">
+                <div data-w-id="248a9181-7393-7ad3-bb5d-d4879893c557" data-animation-type="lottie" data-src="https://uploads-ssl.webflow.com/61ad996e7d943b256097e631/61ad996e7d943b94e797e686_Key.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="3.966666666666667" data-duration="0" class="lottie-animation-11"></div>
+              </div>
+              <h3 class="heading-34">Reconstruct your key.</h3>
+              <p class="paragraph-29">Reconstruct your full key by using<strong> 2 of the following </strong>authentication factors:</p>
+              <div class="auth-steps">
+                <div class="auth-tables auth-table-key-share">
+                  <h4 class="heading-20">Enter exported share</h4>
+                  <div class="w-form">
+                    <form id="wf-form-Key-Share-Form" name="wf-form-Key-Share-Form" data-name="Key Share Form" method="get" class="form-4 outer-btn">
+                      <div class="div-block-47 text-field-outer-btn"><input type="text" class="text-field-2 w-input" maxlength="256" name="name-4" data-name="Name 4" placeholder="" id="exported-share-input" required=""></div><input type="submit" value="ENTER" data-wait="Please wait..." class="button-7 w-button">
+                    </form>
+                    <div class="success-message-5 w-form-done"></div>
+                    <div class="error-message-8 w-form-fail"></div>
+                  </div>
+                </div>
+                <div id="pair-soc-login-sec" class="auth-tables first-step-table w-row">
+                  <div class="w-clearfix w-col w-col-3 w-col-tiny-3"><img src="images/Socials.svg" loading="lazy" width="80" alt="" class="image-7"></div>
+                  <div class="column-33 w-col w-col-9 w-col-tiny-9">
+                    <h4 class="heading-20">Pair with your <strong class="bold-text-5">social login</strong></h4>
+                    <a href="#" class="social-btn w-inline-block"><img src="images/Group-4906.png" loading="lazy" id="rec-google-btn" alt="" class="image-8"></a>
+                    <div id="rec-social-output-sec" class="loggedin-container">
+                      <div class="w-form">
+                        <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="form-4">
+                          <div class="div-block-47"><input type="text" class="text-field-2 w-input" maxlength="256" name="name-4" data-name="Name 4" placeholder="" id="rec-social-email-field">
+                            <div class="div-block-48"><img src="images/greenTikInput_1greenTikInput.png" loading="lazy" alt="" class="image-38"></div>
+                          </div>
+                        </form>
+                        <div class="success-message-5 w-form-done"></div>
+                        <div class="error-message-8 w-form-fail"></div>
+                      </div>
+                      <div class="key-loggedin">
+                        <div class="form-block-3 w-form">
+                          <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="form-11">
+                            <div class="div-block-47"><input type="text" class="text-field-2 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="rec-social-share-field">
+                              <div class="div-block-48">
+                                <a href="#" class="copy-btn w-inline-block"><img src="images/_1.png" loading="lazy" alt="" class="image-39">
+                                  <div id="rec-copy-social-share" class="text-block-32">COPY</div>
+                                </a>
+                              </div>
+                            </div>
+                          </form>
+                          <div class="success-message-5 w-form-done">
+                            <div>Thank you! Your submission has been received!</div>
+                          </div>
+                          <div class="error-message-7 w-form-fail">
+                            <div>Oops! Something went wrong while submitting the form.</div>
+                          </div>
+                        </div>
+                        <a id="rec-social-rem-tbtn" href="#" class="button-7 remove-btn w-button">REMOVE</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="rec-device-share-sec" class="auth-tables second-step-table w-row">
+                  <div class="w-clearfix w-col w-col-3 w-col-tiny-3"><img src="images/Device.svg" loading="lazy" width="80" alt="" class="image-7"></div>
+                  <div class="column-33 w-col w-col-9 w-col-tiny-9">
+                    <h4 class="heading-20">Detect <strong class="bold-text-5">device storage</strong></h4>
+                    <div class="columns-14 w-row">
+                      <div class="column-32 w-clearfix w-col w-col-8 w-col-tiny-8">
+                        <a id="rec-device-share-btn" href="#" class="button-7 dont-btn w-button">DETECT DEVICE</a>
+                      </div>
+                      <div class="w-col w-col-4 w-col-tiny-4">
+                        <a id="rec-skip-device-btn" href="#" class="button-7 skip-device w-button">SKIP</a>
+                      </div>
+                    </div>
+                    <div id="rec-device-output-sec" class="loggedin-container">
+                      <div class="w-form">
+                        <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="form-4">
+                          <div class="div-block-47"><input type="text" class="text-field-2 w-input" maxlength="256" name="name-5" data-name="Name 5" placeholder="" id="rec-device-name-field">
+                            <div class="div-block-48"><img src="images/greenTikInput_1greenTikInput.png" loading="lazy" alt="" class="image-38"></div>
+                          </div>
+                        </form>
+                        <div class="success-message-5 w-form-done"></div>
+                        <div class="error-message-7 w-form-fail"></div>
+                      </div>
+                      <div class="key-loggedin">
+                        <div class="form-block-3 w-form">
+                          <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="form-11">
+                            <div class="div-block-47"><input type="text" class="text-field-2 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="rec-device-share-field">
+                              <div class="div-block-48">
+                                <a href="#" class="copy-btn w-inline-block"><img src="images/_1.png" loading="lazy" alt="" class="image-39">
+                                  <div id="rec-copy-device-share" class="text-block-32">COPY</div>
+                                </a>
+                              </div>
+                            </div>
+                          </form>
+                          <div class="w-form-done">
+                            <div>Thank you! Your submission has been received!</div>
+                          </div>
+                          <div class="w-form-fail">
+                            <div>Oops! Something went wrong while submitting the form.</div>
+                          </div>
+                        </div>
+                        <a id="rec-remove-device-btn" href="#" class="button-7 remove-btn w-button">REMOVE</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="rec-password-share-sec" class="auth-tables third-step-table w-row">
+                  <div class="w-clearfix w-col w-col-3 w-col-small-3 w-col-tiny-3"><img src="images/Password.svg" loading="lazy" width="80" alt="" class="image-7"></div>
+                  <div class="column-33 w-col w-col-9 w-col-small-9 w-col-tiny-9">
+                    <h4 class="heading-3-copy">Enter <strong class="bold-text-6">recovery password</strong></h4>
+                    <div class="form-block-4 w-form">
+                      <form id="rec-password-form" name="email-form-2" data-name="Email Form 2" method="get" class="form-3">
+                        <div class="div-block-47 password"><input type="password" class="text-field-2 w-input" maxlength="256" name="recovery-password-2" data-name="Recovery Password 2" placeholder="Min 10 alphanumeric characters" id="rec-password-input">
+                          <div class="div-block-48"><img src="images/reveal.svg" loading="lazy" id="rec-view-pwd" alt="" class="view-pass"></div>
+                        </div>
+                        <div class="div-block-47 password"><input type="password" class="text-field-2 w-input" maxlength="256" name="confirm-password-2" data-name="Confirm Password 2" placeholder="Retype Password" id="rec-password-confirm-input" required="">
+                          <div class="div-block-48"><img src="images/reveal.svg" loading="lazy" id="rec-view-confirm-pwd" alt="" class="reconstruct-viewpass"></div>
+                        </div><input type="submit" value="ENTER" data-wait="Please wait..." id="rec-password-submit" class="submit-button-2 w-button">
+                      </form>
+                      <div class="success-message-5 w-form-done"></div>
+                      <div class="error-message-4-copy w-form-fail"></div>
+                    </div>
+                    <div class="key-login-container">
+                      <div class="key-loggedin">
+                        <div class="form-block-3 w-form">
+                          <form id="rec-pwd-share-field" name="email-form-3" data-name="Email Form 3" method="get" class="form-11">
+                            <div class="div-block-47"><input type="text" class="text-field-2 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="rec-device-share-field">
+                              <div class="div-block-48">
+                                <a href="#" class="copy-btn w-inline-block"><img src="images/_1.png" loading="lazy" alt="" class="image-39">
+                                  <div id="rec-copy-pwd-share" class="text-block-32">COPY</div>
+                                </a>
+                              </div>
+                            </div>
+                          </form>
+                          <div class="w-form-done">
+                            <div>Thank you! Your submission has been received!</div>
+                          </div>
+                          <div class="w-form-fail">
+                            <div>Oops! Something went wrong while submitting the form.</div>
+                          </div>
+                        </div>
+                        <a id="rec-password-rem-tbtn" href="#" class="button-7 remove-btn w-button">REMOVE</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="rec-after-done-sec" class="div-block-71">
+                <div id="rec-done-sec" class="auth-tables loggedin-table w-row">
+                  <div class="column-31 w-clearfix w-col w-col-1"><img src="images/rec-blue-circle-check_1rec-blue-circle-check.png" loading="lazy" width="50" height="50" alt="" class="image-7"></div>
+                  <div class="column-33 col2-mobile w-col w-col-11">
+                    <h1 class="loggedin-cont">You are logged in!</h1>
+                    <p class="paragraph-29 done-text">Congrats! You’ve successfully retrieved your tKey.</p>
+                    <div class="w-form">
+                      <form id="rec-key-input" name="email-form-4" data-name="Email Form 4" method="get">
+                        <div class="div-block-47"><input type="text" class="text-field-2 blur-overlay w-input" maxlength="256" name="Public-Key" data-name="Public Key" placeholder="Public Key" id="rec-pkey-display" required="">
+                          <div class="div-block-48">
+                            <a href="#" class="copy-btn w-inline-block"><img src="images/_1.png" loading="lazy" alt="" class="image-39">
+                              <div id="rec-copy-pwd-share" class="text-block-32">COPY</div>
+                            </a>
+                          </div>
+                        </div>
+                      </form>
+                      <div class="w-form-done">
+                        <div>Thank you! Your submission has been received!</div>
+                      </div>
+                      <div class="w-form-fail">
+                        <div>Oops! Something went wrong while submitting the form.</div>
+                      </div>
+                    </div>
+                    <a id="rec-pkey-show-btn" href="#" class="button-see w-button">SEE MY PRIVATE KEY</a>
+                    <a id="how-they-work-tbtn" href="https://docs.tor.us/key-infrastructure/overview" target="_blank" class="button-7 howtkey-works-btn w-button">HOW TKEY WORKS</a>
+                  </div>
+                </div>
+                <div id="rec-seed-sec" class="auth-tables loggedin-table w-row">
+                  <div class="column-31 w-clearfix w-col w-col-1"><img src="images/SeedPhrase.svg" loading="lazy" width="50" height="50" alt="" class="image-7"></div>
+                  <div class="column-33 col2-mobile w-col w-col-11">
+                    <h1 class="seedphrase-cont">Here&#x27;s your <strong class="bold-text-5">seed phrase.</strong></h1>
+                    <div class="w-form">
+                      <form id="rec-key-input" name="email-form-4" data-name="Email Form 4" method="get">
+                        <div class="div-block-47"><input type="text" class="text-field-2 blur-overlay w-input" maxlength="256" name="Seed-Phrase" data-name="Seed Phrase" placeholder="Seed Phrase" id="rec-seed-phrase" required="">
+                          <div class="div-block-48">
+                            <a href="#" class="copy-btn w-inline-block"><img src="images/_1.png" loading="lazy" alt="" class="image-39">
+                              <div id="rec-copy-pwd-share" class="text-block-32">COPY</div>
+                            </a>
+                          </div>
+                        </div>
+                      </form>
+                      <div class="w-form-done">
+                        <div>Thank you! Your submission has been received!</div>
+                      </div>
+                      <div class="w-form-fail">
+                        <div>Oops! Something went wrong while submitting the form.</div>
+                      </div>
+                    </div>
+                    <a id="rec-seed-view" href="#" class="button-see w-button">SEE MY SEED PHRASE</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-14 wf-section">
+    <div class="container-1211 w-container">
+      <div class="text-block-11">You don’t have to hear it from us...</div>
+      <h2 class="heading-23">See how <span class="blue-text header-23"><br></span><span class="text-span-23">Binance Extension </span>Wallet removes seed phrases</h2>
+      <div class="text-block-12">Most users do not want to be bothered with private keys and mnemonics. Web3Auth abstracts all these complexity behind a smooth Web 2.0 experience, allowing users to dive straight into the action.</div>
+      <a href="https://chrome.google.com/webstore/detail/binance-wallet/fhbohimaelbohpjbbldcngcnapndodjp" target="_blank" class="button-11a w-button">See how it works</a>
+      <div class="w-layout-grid grid-2-col">
+        <div class="div-block-80">
+          <h6 class="blue-text">Skyweaver</h6>
+          <h5 class="heading-18"><strong class="bold-text-30">Social login, meets Web3 keys</strong></h5>
+          <p class="paragraph-30">We onboard users via the Sequence Smart Wallet, a multi-key Web3 wallet that feels like Web2. Web3Auth’s Distributed Key Generation (DKG) powers the social login as one of those keys to make the login experience feel easy<br>and familiar.<br></p>
+          <div class="w-layout-grid grid-14"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3f9a6cce2de2c87704f85_Peterkieltyaka.png" loading="lazy" alt="" class="image-505">
+            <div id="w-node-_84dfbfd1-e461-c65a-ac23-4546d9c1e469-0ca335bc" class="text-block-15"><strong class="bold-text-29 bold-black">Peter Kieltyka</strong><span class="text-span-17">Co-founder</span></div>
+          </div>
+          <a href="https://medium.com/toruslabs/accelerating-blockchain-adoption-amongst-mainstream-users-with-skyweaver-1a0ea17b1e78?source=collection_home---4------3-----------------------" target="_blank" class="button-11 btn-link-blue w-button">Learn more</a>
+        </div>
+        <div class="div-block-80">
+          <h6 class="blue-text">Kukai Wallet</h6>
+          <h5 class="heading-18"><strong class="bold-text-30">For the best NFT onboarding</strong></h5>
+          <p class="paragraph-30">Web3Auth is the easiest way for non-tech savvy users to onboard into a wallet, making it a great fit for the NFT ecosystem. It reduces friction, and increases conversion.<br>‍</p>
+          <div class="w-layout-grid grid-18"><img src="images/Luis.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 761px) 84vw, 640px" srcset="images/Luis-p-500.png 500w, images/Luis.png 640w" alt="" class="image-505">
+            <div id="w-node-_84dfbfd1-e461-c65a-ac23-4546d9c1e47b-0ca335bc" class="text-block-15"><strong class="bold-text-29 bold-black">Luis Gonzalez</strong><span class="text-span-17">Kukai/Tezos Commons</span></div>
+          </div>
+          <a href="https://medium.com/toruslabs/how-kukai-reached-a-million-user-logins-with-web3auth-sdk-58bdc08ca83d?source=collection_home---4------2-----------------------" target="_blank" class="button-11 btn-link-blue w-button">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="3partners" class="container-1219 flex-vertical">
+    <div class="splide1 flip-svp-2">
+      <div class="flex-vertical">
+        <div class="marquee-horizontal-large-2">
+          <div class="marquee-cover-horizontal-2"></div>
+          <div class="track-horizontal">
+            <div class="splide__list">
+              <div class="splide__slide">
+                <a href="https://twitter.com/adamscochran/status/1385291238795010054?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3f9e07f3b6f64e2f91500_Adamcochran.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d3261333da-0ca335bc" class="text-block-17"><strong class="bold-text-31">Adam Cochran</strong><span class="text-span-15">@adamscochran</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Torus Labs powering social logins and more...</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/KyleSamani/status/1148709249813532672?s=20" target="_blank" class="link-block-8 w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3f9ee0082ce20b6a66b5c_Kylesamani.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d3261333e7-0ca335bc" class="text-block-17"><strong class="bold-text-31">Kyle Samani </strong><span class="text-span-15">@KyleSamani</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">@TorusLabs literally indistinguishable from Web 2.0 flow.</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/kadena_io/status/1397930913481334784?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3f9fc09327d50bf2a1f22_Kadena.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d3261333f4-0ca335bc" class="text-block-17"><strong class="bold-text-31">Kadena</strong><span class="text-span-15">@Kadena.io</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">A seamless digital wallet experience for Kadena-based apps! ...</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/RealChainGames/status/1387842113925226497?s=20" target="_blank" class="link-block-7 w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3f9cb3b43bf6a6e7855f7_Chaingames.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d326133401-0ca335bc" class="text-block-17"><strong class="bold-text-31">Chain Games</strong><span class="text-span-15">@RealChainGames</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Torus Labs bringing masses into crypto! ...<br>‍</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/dogemos/status/1448702587792859159" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d6926eb85a4b24f70fe0ff_Joshlee.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d326133410-0ca335bc" class="text-block-17"><strong class="bold-text-31">Josh Lee</strong><span class="text-span-15">@dogemos</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Also credits where credits are due: ... @TorusLabs team for lots of help with DirectAuth</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/solana/status/1384592784099880965" target="_blank" class="link-block-8 w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d6948f7084bb5726192001_Solana.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d32613341d-0ca335bc" class="text-block-17"><strong class="bold-text-31">Solana</strong><span class="text-span-15">@Solana</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Logging into Solana dApps just got easier !If you&#x27;re a dev looking to simplify key management for your users ...</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/mrwho_nft/status/1479399216959176704" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="images/Mrwho.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d32613342a-0ca335bc" class="text-block-17"><strong class="bold-text-31">Mr. Who_</strong><span class="text-span-15">@mrwho_nft</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Web3 is starting to get the simplicity we need. @TorusLabs has cracked the code for onboarding ...<br></div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/jurezih/status/1478852700041265155" target="_blank" class="link-block-7 w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="images/SwayApe.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d326133438-0ca335bc" class="text-block-17"><strong class="bold-text-31">SwayApe</strong><span class="text-span-15">@jurezih</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">... What’s more likely to happen is what @TorusLabs is building. A web3 wallet that uses web2 auth.<br>‍</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/aeyakovenko/status/1478577860537319425" target="_blank" class="link-block-8 w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="images/Ana.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d326133447-0ca335bc" class="text-block-17"><strong class="bold-text-31">anat◎ly</strong><span class="text-span-15">@aeyakovenko</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">I think @TorusLabs and @ZenGo have made huge strides in the right direction.</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/xIN_8/status/1477938154292539396" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="images/ishan.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d326133454-0ca335bc" class="text-block-17"><strong class="bold-text-31">ishan</strong><span class="text-span-15">@xIN_8</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Would urge utilising @0xSequence + @TorusLabs in conjunction with each other. Unbelievable UX.</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/securixhk/status/1466878792450940935" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="images/Securix.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d326133461-0ca335bc" class="text-block-17"><strong class="bold-text-31">SECURIX</strong><span class="text-span-15">@securixhk</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">#cryptocurrency#UX has been reinvented by @TorusLabs ! Yes, #crypto experience can be 𝘀𝗲𝗰𝘂𝗿𝗲 𝗮𝗻𝗱 𝗳𝗿𝗶𝗰𝘁𝗶𝗼𝗻𝗹𝗲𝘀𝘀 .</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/nathantonani/status/1465832209894445057" target="_blank" class="link-block-7 w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3f9cb3b43bf6a6e7855f7_Chaingames.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d32613346e-0ca335bc" class="text-block-17"><strong class="bold-text-31">Chain Games</strong><span class="text-span-15">@RealChainGames</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Torus Labs bringing masses into crypto! ...<br>‍</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/adamscochran/status/1385291238795010054?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3f9e07f3b6f64e2f91500_Adamcochran.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d32613347d-0ca335bc" class="text-block-17"><strong class="bold-text-31">Adam Cochran</strong><span class="text-span-15">@adamscochran</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Torus Labs powering social logins and more...</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/KyleSamani/status/1148709249813532672?s=20" target="_blank" class="link-block-8 w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3f9ee0082ce20b6a66b5c_Kylesamani.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d32613348a-0ca335bc" class="text-block-17"><strong class="bold-text-31">Kyle Samani </strong><span class="text-span-15">@KyleSamani</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">@TorusLabs literally indistinguishable from Web 2.0 flow.</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/kadena_io/status/1397930913481334784?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3f9fc09327d50bf2a1f22_Kadena.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d326133497-0ca335bc" class="text-block-17"><strong class="bold-text-31">Kadena</strong><span class="text-span-15">@Kadena.io</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">A seamless digital wallet experience for Kadena-based apps! ...</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/RealChainGames/status/1387842113925226497?s=20" target="_blank" class="link-block-7 w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3f9cb3b43bf6a6e7855f7_Chaingames.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_0cce512b-3af3-daa6-fb4f-15d3261334a4-0ca335bc" class="text-block-17"><strong class="bold-text-31">Chain Games</strong><span class="text-span-15">@RealChainGames</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Torus Labs bringing masses into crypto! ...<br>‍</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="3partners" class="container-1219 flex-vertical">
+    <div class="horizontal-scroll-hover-css w-embed">
+      <style>
+.splide__list {
+/*  position: absolute; */
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee-horizontal 30s linear infinite;
+  /* manipulate the speed of the marquee by changing "40s" line above*/
+}
+.splide__list {
+    z-index: 999;
+}
+.splide1:hover .splide__list{
+-webkit-animation-play-state: paused;
+-moz-animation-play-state: paused;
+-o-animation-play-state: paused;
+animation-play-state: paused;
+}
+@keyframes marquee-horizontal {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+/* Responsive 
+@media screen and (max-width: 768px) {
+  @keyframes marquee-horizontal {
+    from { transform: translateX(0); }
+    to { transform: translateX(-90%); }
+  }
+}
+@media screen and (max-width: 414px) {
+  @keyframes marquee-horizontal {
+    from { transform: translateX(0); }
+    to { transform: translateX(-200%); }
+  }
+}*/
+</style>
+    </div>
+    <div class="splide1 flip-svp-2">
+      <div class="flex-vertical">
+        <div class="marquee-horizontal-large-2">
+          <div class="marquee-cover-horizontal-2"></div>
+          <div class="track-horizontal">
+            <div class="splide__list">
+              <div class="splide__slide">
+                <a href="https://twitter.com/pedrouid/status/1369250579730599940?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3fad6d5e0dbc37c07c6bd_Pedrogomes.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f7728-0ca335bc" class="text-block-17"><strong class="bold-text-31">Pedro Gomes</strong><span class="text-span-15">@pedrouid</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">tKey by @TorusLabs is the best IMO. It adds 2FA to OAuth to protect user from a malicious OAuth provider...</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/el33th4xor/status/1286493195048759296?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3faec0eda28c4e080e664_Emingunsirer.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f7735-0ca335bc" class="text-block-17"><strong class="bold-text-31">Emin Guin Sirer</strong><span class="text-span-15">@el33th4xor</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">This is cool: you can log into your Avalanche wallet using your social media account.</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/itamarl/status/1369251406029459464?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3fb08cc7e1e15de39f263_Itamarlesuisse.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f7742-0ca335bc" class="text-block-17"><strong class="bold-text-31">Itamar Lesuisse</strong><span class="text-span-15">@itamarl</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Big fan of @TorusLabs, they have indeed achieved a great level of non-custodiality</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/0xPolygon/status/1384567577356034050?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3fb1e81838f3e424ec5fb_Polygon.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f774f-0ca335bc" class="text-block-17"><strong class="bold-text-31">Polygon | MATIC</strong><span class="text-span-15">@0xPolygon</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Torus Labs, a huge step forward towards accessibility and simplicity in the Blockchain space</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/pedrouid/status/1369250579730599940?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d6906008386d672b6d7558_Starknet.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f775c-0ca335bc" class="text-block-17"><strong class="bold-text-31">StarkNet Maestro</strong><span class="text-span-15">@CryptoMaestro</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">The on-boarding process to @SkyweaverGame is so seamless...</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/ChainSafeth/status/1418213888617762816" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d695a0a54e993dfdebe24d_Chainsafesystems.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f7769-0ca335bc" class="text-block-17"><strong class="bold-text-31">ChainSafe Systems</strong><span class="text-span-15">@chainsafeth</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">... our non-custodial, privacy-first file storage solution, on how we use @TorusLabs&#x27; tKey tech for multi-factor authentication...</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/shegenerates/status/1451344827807846403?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="images/shegenerates.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f7776-0ca335bc" class="text-block-17"><strong class="bold-text-31">Shegen</strong><span class="text-span-15">@shegenerates</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Yep @TorusLabs is actually good and actually works and noon custodial. It&#x27;s dope</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/crowdeats_io/status/1451354783340662843?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="images/crowdeats.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f7783-0ca335bc" class="text-block-17"><span class="text-span-15"><strong>CrowdEATS<br>‍</strong>@crowdeats.io</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Totally agreed. We are one of those web3 dapps. We are integrating with @TorusLabs to provide a seamless ...sign in.</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/JKim_Tran/status/144111784003616768999940?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="images/Jennifer.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f7792-0ca335bc" class="text-block-17"><strong class="bold-text-31">Jennifer K. Tran</strong><span class="text-span-15">@JKim_Tran</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">... compatible across all devices , has mass adoption , and is easy for non-crypto users to use , I always recommend @TorusLabs.</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/shan3v/status/1421261084753813507" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="images/Shane.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f779f-0ca335bc" class="text-block-17"><strong class="bold-text-31">Shane.Stars</strong><span class="text-span-15">@shan3v</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">exactly… @TorusLabs is so much better in terms of UX<br></div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/ethsign/status/1439981980461027334?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3fb08cc7e1e15de39f263_Itamarlesuisse.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f77ad-0ca335bc" class="text-block-17"><strong class="bold-text-31">Itamar Lesuisse</strong><span class="text-span-15">@itamarl</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Introducing identity log in ... via @TorusLabs wallet on EthSign</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/0xPolygon/status/1384567577356034050?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3fb1e81838f3e424ec5fb_Polygon.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f77ba-0ca335bc" class="text-block-17"><strong class="bold-text-31">Polygon | MATIC</strong><span class="text-span-15">@0xPolygon</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Torus Labs, a huge step forward towards accessibility and simplicity in the Blockchain space</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/pedrouid/status/1369250579730599940?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3fad6d5e0dbc37c07c6bd_Pedrogomes.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f77c7-0ca335bc" class="text-block-17"><strong class="bold-text-31">Pedro Gomes</strong><span class="text-span-15">@pedrouid</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">tKey by @TorusLabs is the best IMO. It adds 2FA to OAuth to protect user from a malicious OAuth provider...</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/el33th4xor/status/1286493195048759296?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3faec0eda28c4e080e664_Emingunsirer.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f77d4-0ca335bc" class="text-block-17"><strong class="bold-text-31">Emin Guin Sirer</strong><span class="text-span-15">@el33th4xor</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">This is cool: you can log into your Avalanche wallet using your social media account.<br>‍</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/itamarl/status/1369251406029459464?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3fb08cc7e1e15de39f263_Itamarlesuisse.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f77e3-0ca335bc" class="text-block-17"><strong class="bold-text-31">Itamar Lesuisse</strong><span class="text-span-15">@itamarl</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Big fan of @TorusLabs, they have indeed achieved a great level of non-custodiality</div>
+                  </div>
+                </a>
+              </div>
+              <div class="splide__slide">
+                <a href="https://twitter.com/0xPolygon/status/1384567577356034050?s=20" target="_blank" class="link-block-4 rounded-box-with-shadow w-inline-block">
+                  <div class="w-layout-grid grid-22"><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61d3fb1e81838f3e424ec5fb_Polygon.png" loading="lazy" alt="" class="image-507">
+                    <div id="w-node-_213a3a05-7890-379f-1dc3-eb59ee6f77f0-0ca335bc" class="text-block-17"><strong class="bold-text-31">Polygon | MATIC</strong><span class="text-span-15">@0xPolygon</span></div><img src="https://uploads-ssl.webflow.com/61c9650dd6a037558e3eaf7f/61c9650dd6a0370f0e3eb28d_logo-twitter.png" loading="lazy" alt="">
+                  </div>
+                  <div class="div-block-81">
+                    <div class="text-block-20">Torus Labs, a huge step forward towards accessibility and simplicity in the Blockchain space</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-15 wf-section">
+    <div class="w-container">
+      <div class="text-block-13">Torus is a joint endeavour from the best</div><img src="images/Group-427318313.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 95vw, (max-width: 991px) 728px, 892px" srcset="images/Group-427318313-p-500.png 500w, images/Group-427318313-p-800.png 800w, images/Group-427318313.png 892w" alt="" class="image-526">
+    </div>
+  </div>
+  <div class="section-9 more-top-padding wf-section">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="text-header keys-header">Start building for free via Web3Auth</h1>
+        <p class="big-text center-text">Let&#x27;s work together towards a more open internet</p>
+        <div class="columns-19 w-row">
+          <div class="column-38 w-col w-col-6">
+            <div class="div-block-66">
+              <a href="https://web3auth.io" class="button-hero secondary-mode w-button">Read more</a>
+            </div>
+          </div>
+          <div class="column-39 w-col w-col-6">
+            <div class="div-block-67">
+              <a href="https://dashboard.web3auth.io" class="button-hero primary-mode w-button">Get Started</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer" class="footer small wf-section">
+    <div class="container w-container">
+      <div class="footer-flex-container height">
+        <div class="footer-column-info"><img src="images/torus-logo-blue-1.svg" width="150" alt="" class="image-444">
+          <p class="footer-text">Join our community</p>
+          <div class="div-block-icons">
+            <a href="https://t.me/web3auth" target="_blank" class="social-icon-2 w-inline-block"><img src="images/Telegram_1Telegram.png" width="32" height="32" alt="" class="image-437"></a>
+            <a href="https://twitter.com/TorusLabs" target="_blank" class="social-icon-n w-inline-block"><img src="images/Twitter_1Twitter.png" width="32" height="32" alt="" class="image-437"></a>
+            <a href="https://medium.com/toruslabs" target="_blank" class="social-icon-medium-copy w-inline-block"><img src="images/Exclude_1Exclude.png" width="32" height="32" alt="" class="image-437"></a>
+            <a href="https://github.com/torusresearch/" target="_blank" class="social-icon-github w-inline-block"><img src="images/Github_1Github.png" width="32" height="32" alt="" class="image-437"></a>
+            <a href="https://www.linkedin.com/company/toruslabs" target="_blank" class="social-icon-discord w-inline-block"><img src="images/Linkedin_1Linkedin.png" width="32" height="32" alt="" class="discord"></a>
+            <a href="https://youtube.com/c/web3auth" target="_blank" class="social-icon-youtube w-inline-block"><img src="images/Youtube_1Youtube.png" width="32" height="32" alt="" class="image-23"></a>
+            <a href="http://discord.gg/toruslabs" target="_blank" class="social-icon-discord w-inline-block"><img src="images/Discord_Light_mode_1Discord_Light_mode.png" width="32" height="32" alt="" class="image-23"></a>
+          </div>
+        </div>
+        <div class="footer-column-div">
+          <h2 class="footer-heading">Developers</h2>
+          <ul role="list" class="w-list-unstyled">
+            <li>
+              <a href="https://docs.tor.us" class="footer-link">Documentation</a>
+            </li>
+            <li>
+              <a href="https://tech.tor.us/" class="footer-link">Demo</a>
+            </li>
+            <li>
+              <a href="https://status.web3auth.io" class="footer-link">Status page</a>
+            </li>
+            <li>
+              <a href="https://t.me/web3authdev" class="footer-link">Support</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-column-div">
+          <h2 class="footer-heading">Users</h2>
+          <ul role="list" class="w-list-unstyled">
+            <li>
+              <a href="https://app.tor.us" target="_blank" class="footer-link">My Torus Wallet</a>
+            </li>
+            <li>
+              <a href="https://solana.tor.us" target="_blank" class="footer-link">My Solana Wallet</a>
+            </li>
+            <li>
+              <a href="https://app.openlogin.com" target="_blank" class="footer-link-2">My OpenLogin</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-column-div">
+          <h2 class="footer-heading">Company</h2>
+          <ul role="list" class="w-list-unstyled">
+            <li>
+              <a href="about-us.html" class="footer-link">About us</a>
+            </li>
+            <li>
+              <a href="partners.html" class="footer-link">Partners</a>
+            </li>
+            <li>
+              <a href="https://angel.co/company/torus-2" class="footer-link">Career</a>
+            </li>
+            <li>
+              <a href="https://medium.com/toruslabs" class="footer-link">Newsroom</a>
+            </li>
+            <li>
+              <a href="media-kit.html" class="footer-link">Media kit</a>
+            </li>
+            <li>
+              <a href="contact-us.html" class="footer-link">Contact us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="footer-pte-ltd"><strong class="bold-text-13-copy">© 2022 Torus Labs Private Limited </strong></div>
+        <div class="footer-bottom-div">
+          <div class="footer-policies">
+            <a href="https://docs.tor.us/legal/cookie-policy" target="_blank" class="footer-link">Cookie Policy</a>
+          </div>
+          <div class="text-block-5">
+            <a href="#" class="link space">|</a>
+          </div>
+          <div>
+            <a href="https://docs.tor.us/legal/privacy-policy" target="_blank" class="footer-link">Privacy Policy</a>
+          </div>
+          <div class="text-block-6">
+            <a href="#" class="link space">|</a>
+          </div>
+          <div class="footer-bottom-text">
+            <a href="https://docs.tor.us/legal/terms-and-conditions" target="_blank" class="footer-link">Terms and Conditions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=61ad9953bb767e53c6a335bb" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/torus00.js" type="text/javascript"></script>
+  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.min.js" integrity="sha512-GoORoNnxst42zE3rYPj4bNBm0Q6ZRXKNH2D9nEmNvVF/z24ywVnijAWVi/09iBiVDQVf3UlZHpzhAJIdd9BXqw==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/mode-javascript.min.js" integrity="sha512-ZxMbXDxB0Whct+zt+DeW/RZaBv33N5D7myNFtBGiqpDSFRLxn2CNp6An0A1zUAJU/+bl8CMVrwxwnFcpFi3yTQ==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/theme-tomorrow_night.min.js" integrity="sha512-ryZQhiiDGwaCLx61hQOsRD2qUZ6ln04ve/kmK90rKnMzKCU9kJFXJW8a/1641brqnd6QG7Zv9Iq3Ftp1cjFWuA==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/keybinding-vim.min.js" integrity="sha512-oz1c/ej3p90Q3jaAkdnobWNw392iWTcMSf6HHD+ZyrBS5U1GRicJ/pT0+oIFuO+CPng5XGYi9jShmtlX/f/0UQ==" crossorigin="anonymous"></script>
+  <script>
+      var editor = {
+        wallet: ace.edit("editor-wallet"),
+        direct: ace.edit("editor-direct"),
+        tkey: ace.edit("editor-tkey"),
+      }
+      var walletInput = {
+        wallet: [
+          "import OpenLogin from \"@toruslabs/openlogin\"",  
+          "\n\n",
+          "const sdk = new OpenLogin()",
+          "\n",
+          "sdk.init()",
+          "\n",
+          "sdk.login()",
+          "\n",
+          "console.log(sdk.privKey)",
+          "\n",
+        ],
+        direct: [
+          "import OpenLogin from \"@toruslabs/openlogin\"",  
+          "\n\n",
+          "const sdk = new OpenLogin()",
+          "\n",
+          "sdk.init()",
+          "\n",
+          "sdk.login()",
+          "\n",
+          "console.log(sdk.privKey)",
+          "\n",
+        ],
+        tkey: [
+           "import OpenLogin from \"@toruslabs/openlogin\"",  
+          "\n\n",
+          "const sdk = new OpenLogin()",
+          "\n",
+          "sdk.init()",
+          "\n",
+          "sdk.login()",
+          "\n",
+          "console.log(sdk.privKey)",
+          "\n",
+        ]
+      }
+      var timeouts = []
+      // Setup Editors
+      setupEditor(editor.wallet)
+      setupEditor(editor.direct)
+      setupEditor(editor.tkey)
+      // listen to tab changes
+      document.querySelectorAll(".editor-selector").forEach(function(elem) {
+        elem.addEventListener("click", function() {
+          var showType = this.dataset.type
+          if(!this.classList.contains('w--current')) {
+            timeouts.forEach(timeout => clearTimeout(timeout))
+            addTexts(editor[showType], walletInput[showType])
+          }
+        })
+      });
+      // listen to scroll
+      window.addEventListener("scroll", triggerEditorOnScroll);
+      function triggerEditorOnScroll() {
+        var elementTarget = document.getElementById("torus-feats");
+        if (window.scrollY > (elementTarget.offsetTop - elementTarget.offsetHeight + 100) && window.scrollY < (elementTarget.offsetTop + elementTarget.offsetHeight - 600)) {
+            var currentSelector = document.querySelector(".editor-selector.w--current")
+            addTexts(editor[currentSelector.dataset.type], walletInput[currentSelector.dataset.type])
+            window.removeEventListener("scroll", triggerEditorOnScroll)
+        }
+      }
+      function setupEditor(editor) {
+          editor.setTheme("ace/theme/tomorrow_night");
+          editor.session.setMode("ace/mode/javascript");
+          editor.session.setTabSize(2);
+          editor.setKeyboardHandler('ace/keyboard/vim')
+          editor.setBehavioursEnabled(false)
+          editor.setOptions({
+            autoScrollEditorIntoView: true,
+          });
+          editor.session.on('change', () => {
+            editor.renderer.scrollToLine(Number.POSITIVE_INFINITY)
+          })
+      }
+      function addTexts(editor, editorInput) {
+        var timer = 0;
+        editor.setValue("")
+        editorInput.forEach((text, i) => {
+          var timeout = setTimeout(() => {
+            addChars(editor, text, timer)
+          }, timer);
+          timeouts.push(timeout)
+          timer += (text.length*20 + 300)
+        });
+      }
+      function addChars(editor, textLine, timer) {
+        var chars = [textLine]
+        if(textLine !== "\n") {
+          chars = textLine.split('')
+        }
+        chars.forEach((char, i) => {
+          timeout = setTimeout(() => {
+            editor.insert(char)
+          }, i * 20);
+          timeouts.push(timeout)
+        });
+      }
+  </script><!--  Google Tag Manager (noscript)  -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KN2SFHS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!--  End Google Tag Manager (noscript)  -->
+</body>
+</html>

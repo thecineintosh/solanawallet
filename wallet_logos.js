@@ -2,7 +2,7 @@
 const walletLogos = {
   // All wallets now have local logo files
   "Phantom": "logos/phantom.png",
-  "Solflare": "logos/solflare.svg",
+  "Solflare": "logos/solflare.png",  // Updated to use PNG instead of SVG
   "Keystone": "logos/keystone.png",
   "Robinhood": "logos/robinhood.png",
   "Hotbit": "logos/hotbit.png",
@@ -95,7 +95,13 @@ const walletLogos = {
   "Unchained": "logos/unchained.png",
   "Plaid": "logos/plaid.png",
   "Yodlee": "logos/yodlee.png",
-  "Quovo": "logos/quovo.png"
+  "Quovo": "logos/quovo.png",
+  
+  // Additional wallets mentioned by user
+  "Torus": "logos/torus.png",
+  "Jupiter Mobile": "logos/jupiter_mobile.png",
+  "Fuse": "logos/fuse.png",
+  "Nightly": "logos/nightly.png"
 };
 
 // Fallback function to get wallet logo with error handling
