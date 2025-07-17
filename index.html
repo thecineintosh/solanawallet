@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Wallet Directory 2024: Complete Feature Matrix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>Solana Wallet Directory 2024</h1>
+                <p class="subtitle">Complete Feature Matrix & Solana Pay Compatibility Guide</p>
+            </div>
+        </header>
+
+        <!-- Hero Stats -->
+        <section class="hero-stats">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalWallets">14</div>
+                    <div class="stat-label">Total Wallets</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="solanaPayWallets">3</div>
+                    <div class="stat-label">Solana Pay Compatible</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="mobileWallets">12</div>
+                    <div class="stat-label">Mobile Wallets</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="hardwareWallets">1</div>
+                    <div class="stat-label">Hardware Wallets</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Filters -->
+        <section class="quick-filters">
+            <h2>Quick Filters</h2>
+            <div class="filter-buttons">
+                <button class="btn btn--secondary filter-btn" data-filter="all">All Wallets</button>
+                <button class="btn btn--secondary filter-btn" data-filter="mobile">Mobile</button>
+                <button class="btn btn--secondary filter-btn" data-filter="desktop">Desktop</button>
+                <button class="btn btn--secondary filter-btn" data-filter="hardware">Hardware</button>
+                <button class="btn btn--secondary filter-btn" data-filter="solana-pay">Solana Pay</button>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar with Advanced Filters -->
+            <aside class="sidebar">
+                <div class="filter-panel">
+                    <h3>Advanced Filters</h3>
+                    
+                    <!-- Search -->
+                    <div class="form-group">
+                        <label class="form-label">Search</label>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search wallets...">
+                    </div>
+
+                    <!-- Platform Filter -->
+                    <div class="form-group">
+                        <label class="form-label">Platform</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" value="iOS"> iOS</label>
+                            <label><input type="checkbox" value="Android"> Android</label>
+                            <label><input type="checkbox" value="Chrome"> Chrome</label>
+                            <label><input type="checkbox" value="Firefox"> Firefox</label>
+                            <label><input type="checkbox" value="Windows"> Windows</label>
+                            <label><input type="checkbox" value="Mac"> Mac</label>
+                            <label><input type="checkbox" value="Linux"> Linux</label>
+                            <label><input type="checkbox" value="Hardware"> Hardware</label>
+                        </div>
+                    </div>
+
+                    <!-- Solana Pay QR -->
+                    <div class="form-group">
+                        <label class="form-label">Solana Pay QR</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" value="Yes"> Yes</label>
+                            <label><input type="checkbox" value="Partial"> Partial</label>
+                            <label><input type="checkbox" value="No"> No</label>
+                            <label><input type="checkbox" value="Unknown"> Unknown</label>
+                        </div>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="form-group">
+                        <label class="form-label">Features</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" value="dexSwap"> DEX Swap</label>
+                            <label><input type="checkbox" value="nftGallery"> NFT Gallery</label>
+                            <label><input type="checkbox" value="staking"> Staking</label>
+                            <label><input type="checkbox" value="fiatOnramp"> Fiat On-ramp</label>
+                            <label><input type="checkbox" value="hardwareSupport"> Hardware Support</label>
+                        </div>
+                    </div>
+
+                    <!-- Custody Model -->
+                    <div class="form-group">
+                        <label class="form-label">Custody Model</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" value="Self-custody"> Self-custody</label>
+                            <label><input type="checkbox" value="Hardware"> Hardware</label>
+                            <label><input type="checkbox" value="MPC"> MPC</label>
+                        </div>
+                    </div>
+
+                    <!-- Security Audit -->
+                    <div class="form-group">
+                        <label class="form-label">Security Audit</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" value="Yes"> Audited</label>
+                            <label><input type="checkbox" value="No"> Not Audited</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="btn btn--primary" id="applyFilters">Apply Filters</button>
+                        <button class="btn btn--secondary" id="clearFilters">Clear All</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="content">
+                <!-- Controls -->
+                <div class="content-controls">
+                    <div class="results-count">
+                        <span id="resultsCount">14</span> wallets found
+                    </div>
+                    <div class="controls-right">
+                        <button class="btn btn--outline" id="compareBtn" disabled>
+                            Compare Selected (<span id="compareCount">0</span>)
+                        </button>
+                        <button class="btn btn--outline" id="exportBtn">Export CSV</button>
+                    </div>
+                </div>
+
+                <!-- Wallet Grid -->
+                <div class="wallet-grid" id="walletGrid">
+                    <!-- Wallet cards will be generated by JavaScript -->
+                </div>
+            </main>
+        </div>
+
+        <!-- Comparison Modal -->
+        <div class="modal" id="comparisonModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Wallet Comparison</h2>
+                    <button class="modal-close" id="closeComparison">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="comparison-table" id="comparisonTable">
+                        <!-- Comparison table will be generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wallet Details Modal -->
+        <div class="modal" id="walletModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="walletModalTitle">Wallet Details</h2>
+                    <button class="modal-close" id="closeWalletModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="wallet-details" id="walletDetails">
+                        <!-- Wallet details will be generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Chart -->
+        <section class="analytics-section">
+            <h2>Solana Pay QR Support Analysis</h2>
+            <div class="chart-container">
+                <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/c03a1ead805cd48db14a569bb4a055c4/1c9744d4-c713-4761-9a26-e425d37e0309/dc58f72d.png" alt="Solana Pay QR Support Distribution" class="chart-image">
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Solana Wallet Directory. Data updated regularly. Last updated: <span id="lastUpdated"></span></p>
+            <p>Built for developers, merchants, and users choosing the right Solana wallet.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
