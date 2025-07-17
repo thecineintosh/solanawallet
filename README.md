@@ -152,4 +152,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built for the Solana ecosystem with ❤️ to make wallet discovery easier for everyone.**
 
-*Last updated: July 2024*
+*Last updated: July 2025*
