@@ -23,8 +23,8 @@ const walletLogos = {
   "Bitget Wallet": "logos/bitget_wallet.png",
   "Crossmint": "logos/crossmint.png",
   "Enkrypt": "logos/enkrypt.png",
-  "Binance Web3 Wallet": "logos/binance_web3_wallet.png",
-  "Para": "logos/para.png",
+  "Binance Web3 Wallet": "logos/aperture_wallet.png", // Using aperture logo as placeholder
+  "Para": "logos/alpha_wallet.png", // Using alpha logo as placeholder
   "Tiplink": "logos/tiplink.png",
   "Trezor": "logos/trezor.png",
   "Crossmint Non-Custodial": "logos/crossmint_non_custodial.png",
@@ -35,7 +35,7 @@ const walletLogos = {
   "Bithumb": "logos/bithumb.png",
   "Bittrex": "logos/bittrex.png",
   "Gemini": "logos/gemini.png",
-  "Binance": "logos/binance.png",
+  "Binance": "logos/aperture_wallet.png", // Using aperture logo as placeholder
   "Coinbase": "logos/coinbase.png",
   "Bitstamp": "logos/bitstamp.png",
   "Crypto.com": "logos/crypto.com.png",
