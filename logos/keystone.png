@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- The first thing in any HTML file should be the charset -->
+  <meta charset="utf-8">
+  <!-- Make the page mobile compatible -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <!-- Allow installing the app to the homescreen -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" href="/favicon.ico" />
+  <title>Keystone</title>
+  <!-- Link Preview setting for socail media like x, facebook  -->
+  <!-- TODO: This content should be changed based on url, should be changed to ssr -->
+  <!-- Disable it for not using keyst.one for blink sale-->
+  <!-- <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content=@KeystoneWallet />
+  <meta name="twitter:title" content="Keystone Wallet" />
+  <meta name="twitter:description" content="Secure your Bitcoin and other crypto assets offline with Keystone's open-source cold wallet." />
+  <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/82647983" />
+  <meta property="og:title" content="Keystone Wallet"/>
+  <meta property="og:description" content="Secure your Bitcoin and other crypto assets offline with Keystone's open-source cold wallet."/>
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/82647983" /> -->
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5485PQHP');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WCBLWW84S2"></script>
+  <script src="https://cdn.seel.com/test/scripts/keystone/1.0.0/keystone.marketplace-embedded.min.js" defer></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-WCBLWW84S2');
+    gtag('config', 'AW-16532716473');
+  </script>
+  <!-- Twitter conversion tracking base code -->
+  <script>
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+    },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+    a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    twq('config','on1j8');
+  </script>
+  <!-- End Twitter conversion tracking base code -->
+<script>(function(){function e(e,t){return null!=t&&"undefined"!=typeof Symbol&&t[Symbol.hasInstance]?!!t[Symbol.hasInstance](e):e instanceof t}var t={link:HTMLLinkElement,script:HTMLScriptElement,img:HTMLImageElement};function n(e,t){for(var n="",r=0;r<t.length;r++)if(-1!==e.indexOf(t[r])){n=t[r];break}return n||window.origin}function r(n,r){var i=r.target,a=i.tagName.toLocaleLowerCase(),o=n.type,c=e(i,HTMLScriptElement)||e(i,HTMLImageElement)?i.src:e(i,HTMLLinkElement)?i.href:null;return!!(a&&-1!==o.indexOf(a)&&t[a]&&e(i,t[a]))&&!!c&&{target:i,tagName:a,url:c}}var i=/[?#].*$/;"undefined"==typeof window||window.__RB_ASYNC_CHUNKS__||(window.__RB_ASYNC_CHUNKS__={});try{var a,o,c={"max":3,"type":["link","script","img"],"domain":[],"crossOrigin":"anonymous"};a=function(t){try{!function(t,a){var o,c,s,l,u,d=r(t,a);if(!1!==d){var m=d.target,y=d.tagName,f=d.url;if(!("undefined"!=typeof window&&Object.keys(window.__RB_ASYNC_CHUNKS__||{}).some(function(e){return -1!==f.indexOf(e)}))){var g=t.test;if(g){if("string"==typeof g){var p=new RegExp(g);g=function(e){return p.test(e)}}if("function"!=typeof g||!g(f))return}var _=n(f,t.domain);if(!t.domain||!(t.domain.length>0)||-1!==t.domain.indexOf(_)){var v,b=Number(m.dataset.rbRetryTimes)||0;if(b===t.max){"function"==typeof t.onFail&&t.onFail({times:b,domain:_,url:f,tagName:y,isAsyncChunk:!1});return}var L=(c=n(_,o=t.domain),s=o.indexOf(c),o[(s+1)%o.length]||_),S=null!==(u=m.dataset.rbOriginalQuery)&&void 0!==u?u:(l=f.split("?")[1])?"?".concat(l.split("#")[0]):"",E=!!m.dataset.rbAsync||m.async||m.defer,w={url:f.replace(_,L).replace(i,"")+(v=b+1,!0===t.addQuery?""!==S?"".concat(S,"&retry=").concat(v):"?retry=".concat(v):"function"==typeof t.addQuery?t.addQuery({times:v,originalQuery:S}):""),times:b+1,crossOrigin:t.crossOrigin,isAsync:E,originalQuery:S},O=function(t,n){var r=!0===n.crossOrigin?"anonymous":n.crossOrigin,i=r?'crossorigin="'.concat(r,'"'):"",a=n.times?'data-rb-retry-times="'.concat(n.times,'"'):"",o=n.originalQuery?'data-rb-original-query="'.concat(n.originalQuery,'"'):"",c=n.isAsync?"data-rb-async":"";if(e(t,HTMLScriptElement)){var s=document.createElement("script");return s.src=n.url,r&&(s.crossOrigin=r),n.times&&(s.dataset.rbRetryTimes=String(n.times)),n.isAsync&&(s.dataset.rbAsync=""),void 0!==n.originalQuery&&(s.dataset.rbOriginalQuery=n.originalQuery),{element:s,str:'<script src="'.concat(n.url,'" ').concat(i," ").concat(a," ").concat(c," ").concat(o,">")+"<\/script>"}}if(e(t,HTMLLinkElement)){var l=document.createElement("link");return l.rel=t.rel||"stylesheet",t.as&&(l.as=t.as),l.href=n.url,r&&(l.crossOrigin=r),n.times&&(l.dataset.rbRetryTimes=String(n.times)),void 0!==n.originalQuery&&(l.dataset.rbOriginalQuery=n.originalQuery),{element:l,str:'<link rel="'.concat(l.rel,'" href="').concat(n.url,'" ').concat(i," ").concat(a," ").concat(l.as?'as="'.concat(l.as,'"'):""," ").concat(o,"></link>")}}}(m,w);"function"==typeof t.onRetry&&t.onRetry({times:b,domain:_,url:f,tagName:y,isAsyncChunk:!1}),e(m,HTMLScriptElement)&&(w.isAsync?document.body.appendChild(O.element):document.write(O.str)),e(m,HTMLLinkElement)&&document.getElementsByTagName("head")[0].appendChild(O.element),e(m,HTMLImageElement)&&(m.src=w.url,m.dataset.rbRetryTimes=String(w.times),m.dataset.rbOriginalQuery=String(w.originalQuery))}}}}(c,t)}catch(e){console.error("retry error captured",e)}},o=function(e){try{!function(e,t){var i=r(e,t);if(!1!==i){var a=i.target,o=i.tagName,c=i.url,s=n(c,e.domain),l=Number(a.dataset.rbRetryTimes)||0;0!==l&&"function"==typeof e.onSuccess&&e.onSuccess({times:l,domain:s,url:c,tagName:o,isAsyncChunk:!1})}}(c,e)}catch(e){console.error("load error captured",e)}},"undefined"!=typeof window&&void 0!==window.document&&(document.addEventListener("error",function(t){t&&e(t.target,Element)&&a(t)},!0),document.addEventListener("load",function(t){t&&e(t.target,Element)&&o(t)},!0))}catch(e){console.error("monitor error captured",e)}})()</script><link rel="icon" href="/favicon.ico"><script defer src="/resource/js/lib-polyfill_script.9484f6ef.js" crossorigin="anonymous" integrity="sha384-HHmlZ8YcdrXWLP8Yxh0jqaR3eWBFT08jr85jN+k2ry/AOoNKawXyOrBltnkWrSEw"></script><script defer src="/resource/js/lib-react_script.d5665497.js" crossorigin="anonymous" integrity="sha384-Cojo8TYENUSz5ewB6zIcl0kZ1zojDI3z7J/rBaNHXuX4WabDxYGQquFQzJw7i0zw"></script><script defer src="/resource/js/lib-router_script.7c8a851e.js" crossorigin="anonymous" integrity="sha384-rTI4fgCSOdRmCFLo8d+pEcfhom/hAMLAZ2V6tOU2Yn28YJKQMxuYI4pPP+OkpLG3"></script><script defer src="/resource/js/2768_script.3205cb3e.js" crossorigin="anonymous" integrity="sha384-jlbjGL5/BPeuktnLD99w0BOBbynIrzk8J7cDL7beaiwBtaQF7P3Tz5fOkIHa21rD"></script><script defer src="/resource/js/index_script.72aebc67.js" crossorigin="anonymous" integrity="sha384-ELZyn5SOKRMPJ+WU5Q7gg4nd+xxczfortD0nicvQNi6LSL0Wyvxnoy1O1fqDJxTx"></script><link href="/static/css/2768.f67d7649.css" rel="stylesheet" crossorigin="anonymous" integrity="sha384-VfSledfxeLhPApjYJU2UPMMkNyy7uMexlB2wmS8Un++EUsKrYoN7Rt5WFDQ2X34T"><link href="/static/css/index.dd7deac8.css" rel="stylesheet" crossorigin="anonymous" integrity="sha384-Bei54XwqVhQHufSSomYtgSKnEvoRH4Z3bw6PF+tHkkgCSQViWsQFx2bwC8mQ5d2X"></head>
+
+<body>
+  <!-- Display a message if JS has been disabled on the browser. -->
+  <noscript>If you're seeing this message, that means
+    <strong>JavaScript has been disabled on your browser</strong>, please
+    <strong>enable JS</strong> to make this app work.</noscript>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5485PQHP"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- The app hooks into this div -->
+  <div id="app"></div>
+
+  <!-- Refersion Tracking -->
+  <script>
+    (function (w,d,s,u,o,c,e,x) {
+      w['TrackingSystemObject']=o;
+      e=d.createElement(s);e.async=1;e.src=u;e.onload=c;x=d.getElementsByTagName(s)[0];x.parentNode.insertBefore(e, x);
+    })(window,document,'script','https://cdn.refersion.com/refersion.js','REFERSION',function () {
+      // Configure SDK
+      REFERSION.pubKey = 'pub_630c2c03aba1a4960039';
+      // Initialize
+      REFERSION.initializeXDLS().then(function () {
+        REFERSION.launchDefault();
+      });
+    });
+  </script>
+  <!-- End Refersion Tracking -->
+
+  <!-- A lot of magic happens in this file. HtmlWebpackPlugin automatically injects all assets (e.g. bundle.js, main.css) with the correct HTML tags, which is why they are missing in this file. Don't add any assets here! (Check out webpack.dev.babel.js and webpack.prod.babel.js if you want to know more) -->
+</body>
+
+</html>
